@@ -1,0 +1,213 @@
+/*****************************************************************************
+TITLE: Claims																																
+AUTHOR:   C M Devanand
+ID:2001CS19
+Declaration of Authorship
+This txt file, claims.txt, is part of the assignment of CS322 at the 
+department of Computer Science and Engg, IIT Patna . 
+*****************************************************************************/
+
+Files:
+==========
+*All the files i submitted, asm.c and emu.c and claims.txt, have my name and student id at the start, along with a declaration of authorship.
+
+The evidence for Assembler including the output files from the 5 (eg five)  test examples has also been uploaded. They are test1(3 output files), test2(1 output files), test3
+(3 output file), test4(3 output files) and bubble(3 output files). All the test files have been tested and work properly. As for the evidence for the emulator is uploaded
+with two output files, memcpy.txt and triangle.txt.
+
+*Both of my c++ programs did not show any errors and warnings when i compiled it with g++.
+
+
+*Two programs are compilable with g++ asm.cpp -o asm and g++ emu.cpp -o emu.
+
+
+=============================
+Program format and structure:
+=============================
+1. The assembler:
+
+    * with two data structures to store respectively labels and mnemonic table with expected operands.
+    * uses a single routine for both passes.
+    * detects label erros.
+    * consistent and sensible formatting with sensible program structure. 
+    * sensible variable, function & type names with explanatory comments.
+		* advanced listing file.
+		* assembles test programs.
+	  * can implements and demonstrates the instruction SET.
+
+2. The emulator  :
+
+		* with three data structures to store respectively memory, mnemonic table with expected operands
+		  and a linked list structure word.
+    * loads object file, 
+    * by giving the instructions like "-befor/-after" , the program can produce memory dump before/after execution.
+    * by giving the instruction like "-trace", the program prints the result of program executed.
+    * detects errant programs.
+
+
+=============================
+Testing:
+=============================
+
+1. The assembler:
+
+I have tested   five examples shown as bellow. The errors only occurred in the file test2.asm and 
+the program immediately stopped on the second pass. 
+
+The others were tested without any errors detected and produced three output files, listing file, 
+error log file and machine readable object file, for each example. 
+
+After comparing the listing files and object file of memcpy.asm , memcpy.l, triangle.l memcpy.o 
+with the implemented result given on the assignment, both of them show no difference 
+from those provided( if there is different  that is fine too) 
+ 
+
+1)
+#Input: asm test1.asm
+#Output: 
+
+Has Warning at Line 0 : Label having this  "label" is not used but declared
+Has Warning at Line 12 : HALT instruction is not found .
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Code compiled with no errors!!!
+Logs of the code is generated in: test1log.txt
+Machine code of the code  generated in: test1.o
+Listing of the code  generated in: test1.l
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+2)
+#Input:asm test2.asm
+#Output: 
+a. test2.l 
+b. test2.log (with error messages shown as below but also in log file)
+c. test2.o
+
+error messages:
+Unable to Assemble!!
+Have a Error at Line 4 : Duplicate label definition of "label"
+Have a Error at Line 5 : this "nonesuch"label is not been declared
+Have a Error at Line 6 : Not a Valid label or number
+Have a Error at Line 7 : Missing Operand
+Have a Error at Line 8 : Unexpected Operand
+Have a Error at Line 9 : Extra operand on end of line
+Have a Error at Line 9 : Not a Valid label or number
+Have a Error at Line 10 : Bogus Label Name
+Have a Error at Line 11 : Bogus Mnemonic
+Have a Error at Line 12 : Bogus Mnemonic
+
+3)
+#Input:asm test3.asm
+#Output:
+Has Warning at Line 12 : HALT instruction is not found .
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Code compiled with no errors!!!
+Logs of the code is generated in: test3log.txt
+Machine code of the code  generated in: test3.o
+Listing of the code  generated in: test3.l
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4)
+#Input:asm test4.asm
+#Output: 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Code compiled with no errors!!!
+Logs of the code is generated in: test4log.txt
+Machine code of the code  generated in: test4.o
+Listing of the code  generated in: test4.l
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+5)
+#Input:asm bubble.asm
+#Output: 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Code compiled with no errors!!!
+Logs of the code is generated in: bubblelog.txt
+Machine code of the code  generated in: bubbletest4.o
+Listing of the code  generated in: bubbletest4.l
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+2. The emulator:
+
+I have tested three examples shown as bellow.  
+
+The others were tested without any errors detected and produced excution data both on the screen and 
+output text file for each example according to the usage instruction. 
+
+After running the bin file given, the trace data are the same as 
+the implemented result from my own program.
+
+1)
+#Input:emu  bubble.o
+#Output: 
+Instruction given below are available in emulator:
+Trace:For trace write   -t command 
+Trace number: For trace number write -t num(a number) in emulator
+Run at once:For all commands to run at once have to write -f in terminal  
+Future instructions: For all the upcoming instruction write -u 
+Show memory dump before execution: For current memory have to write -bd
+Show a memory location: For looking to memory location -data  
+Show memory dump after execution: For the memory after the execution write -ad
+-t
+PC=00000000    00100000 ldc 00001000
+A=00001000       B=00000000      SP=00000000     PC=00000001
+-bd
+00000000        00100000 0000000B FFFFFF0A 00000A00
+00000004        00000003 00004100 0000010D 00000012
+00000008        FFFFFF0A 00000003 00000203 FFFFFD0A
+0000000c        00000000 00000003 00000100 00000103
+00000010        00000000 00000203 00000402 00000202
+00000014        00000007 00000100 00000007 0000260F
+00000018        00000100 00000103 00000402 00000202
+0000001c        00000007 00000102 00000007 0000160F
+00000020        00000502 00000004 00000000 00000104
+00000024        00000007 00000110 00000A11 00000502
+00000028        00000004 00000003 00000502 00000104
+0000002c        00000502 00000005 00000002 00000502
+00000030        00000105 00000100 00000102 00000006
+00000034        00000103 FFFFE411 00000100 00000202
+00000038        00000006 00000203 00000100 00000502
+0000003c        00000006 FFFFD411 00000302 0000050A
+00000040        0000000E 000000DF 00000096 0000012C
+00000044        00000190 000001FE 0000026F 000002C5
+00000048        00000356 00000390 000003E8 000003E8
+
+2)
+#Input: emu  test1.asm
+#Output:
+Instruction given below are available in emulator:
+Trace:For trace write   -t command 
+Trace number: For trace number write -t num(a number) in emulator
+Run at once:For all commands to run at once have to write -f in terminal  
+Future instructions: For all the upcoming instruction write -u 
+Show memory dump before execution: For current memory have to write -bd
+Show a memory location: For looking to memory location -data  
+Show memory dump after execution: For the memory after the execution write -ad
+-t
+PC=00000000    00000000 ldc 00000000
+A=00000000       B=00000000      SP=00000000     PC=00000001
+-bd
+00000000        00000000 FFFFFB00 00000500 FFFFFF11
+00000004        00000011 00000300 00000700 00000000
+00000008        00000000
+
+
+3)
+#Input: emu  test3.asm
+#Output: 
+Instruction given below are available in emulator:
+Trace:For trace write   -t command 
+Trace number: For trace number write -t num(a number) in emulator
+Run at once:For all commands to run at once have to write -f in terminal  
+Future instructions: For all the upcoming instruction write -u 
+Show memory dump before execution: For current memory have to write -bd
+Show a memory location: For looking to memory location -data  
+Show memory dump after execution: For the memory after the execution write -ad
+-t
+PC=00000000    00000200 ldc 00000002
+A=00000002       B=00000000      SP=00000000     PC=00000001
